@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="BAITAP1">
+      <h1>BÀI TẬP 1</h1>
+      <label for="">Nhập ngày thàng năm vào ô bên dưới</label>
+      <input type="text" placeholder="Ngày" id="idNgay" />
+      <input type="text" placeholder="Tháng" id="idThang" />
+      <input type="text" placeholder="Năm" id="idNam" />
+      <br />
+      <br />
+      <span>Ngày tiếp theo là :</span>
+      <button id="btnKqTiepTheo">Xuất</button>
+
+      <p id="idNgayTiepTheo"></p>
+      <br />
+      <span>Ngày trước đó là :</span>
+      <button id="btnKqTruocDo">Xuất</button>
+      <p id="idNgayTruocDo"></p>
+    </div>
+    <hr />
+    <!-- BÀI TẬP 2 -->
+    <div class="BAITAP2">
+      <h1>BÀI TẬP 2</h1>
+      <label for="">Nhập tháng vào ô bên dưới</label>
+      <input type="text" id="idNhapThang" placeholder="Tháng..." />
+      <input type="text" placeholder="Năm..." id="idNhapNam" />
+      <button id="btnKq2">Xuất</button>
+      <p>Tháng này có <span id="idXuatNgay"></span> ngày</p>
+      <p id="idLoiNhap"></p>
+    </div>
+    <hr />
+    <!-- BÀI TẬP 3 -->
+    <div class="BAITAP3">
+      <h1>BÀI TẬP 3</h1>
+      <label for="">Cách đọc số nguyên có 3 chữ số</label>
+      <input type="text" placeholder="..." id="idDocSoNguyen" />
+      <button id="btnKq3">Cách đọc</button> <br />
+      <br />
+      Cách đọc của số nguyên này là : <span id="idCachDoc"></span>
+    </div>
+    <hr />
+    <div class="BAITAP4">
+      <h1>BÀI TẬP 4</h1>
+      <p>Giả sử tọa độ của trường là (0 , 0). Hãy nhập tọa độ của sinh viên</p>
+      <p>
+        Gọi (Ox,Oy) là tọa độ của sinh viên, Oz là khoảng cách từ nhà sinh viên
+        tới trường ( 0, 0 )
+      </p>
+      <p>Văn Minh Thuận</p>
+      <input type="text" id="idOxA" placeholder="Ox" />
+      <input type="text" id="idOyA" placeholder="0y" />
+      <p>Văn Diệu Hiền</p>
+
+      <input type="text" id="idOxB" placeholder="Ox" />
+      <input type="text" id="idOyB" placeholder="0y" />
+      <p>Văn Anh Thư</p>
+
+      <input type="text" id="idOxC" placeholder="Ox" />
+      <input type="text" id="idOyC" placeholder="0y" />
+      <button id="btnKq4">Xuất</button>
+      <p style="margin-bottom:30px">Sinh viên có khoảng cách xa trường nhất là:</p>
+      <p id="xuatOzA"></p>
+      <p id="xuatOzB"></p>
+      <p id="xuatOzC"></p>
+    </div>
+
+    <script src="./main1.js"></script>
+  </body>
+</html>
