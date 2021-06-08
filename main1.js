@@ -12,12 +12,15 @@ Bước 3: xuất output:
 xuất ra thông tin. ngày tiếp theo và ngày trước đó của ngày đã cho trước
 _nếu nhập sai định dạng (ngày<1 và ngày>31 và tháng<1 và tháng>12) sẽ báo lỗi cho người dùng nhập lại
  */
-var ngayTiepTheo = document.getElementById("idNgayTiepTheo");
-var ngayTruocDo = document.getElementById("idNgayTruocDo");
-document.getElementById("btnKqTruocDo").onclick = function () {
-  var ngay = document.getElementById("idNgay").value;
-  var thang = document.getElementById("idThang").value;
-  var nam = document.getElementById("idNam").value;
+var getEle = function (id) {
+  return document.getElementById(id);
+};
+var ngayTiepTheo = getEle("idNgayTiepTheo");
+var ngayTruocDo = getEle("idNgayTruocDo");
+var ngayTruoc = function () {
+  var ngay = getEle("idNgay").value;
+  var thang = getEle("idThang").value;
+  var nam = getEle("idNam").value;
   if (ngay >= 1 && ngay <= 31 && thang >= 1 && thang <= 12) {
     if (ngay == 1 && thang == 3) {
       if ((nam % 4 == 0 && nam % 100 != 0) || nam % 400 == 0) {
@@ -46,27 +49,40 @@ document.getElementById("btnKqTruocDo").onclick = function () {
       ngay = 31;
       thang--;
     }
-    ngayTruocDo.style.display = "block";
   } else {
-    alert("Bạn đã nhập sai định dạng , mời nhập lại...");
+    alert("Bạn đã nhập sai định dạng có thể dẫn tới sai kết quả, mời nhập lại");
     ngayTruocDo.style.display = "none";
   }
+  ngayTruocDo.style.display = "block";
+
   ngayTruocDo.innerHTML = " ngày " + ngay + " tháng " + thang + " năm " + nam;
 };
 
-document.getElementById("btnKqTiepTheo").onclick = function () {
-  var ngay = document.getElementById("idNgay").value;
-  var thang = document.getElementById("idThang").value;
-  var nam = document.getElementById("idNam").value;
+var ngayTiep = function () {
+  var ngay = getEle("idNgay").value;
+  var thang = getEle("idThang").value;
+  var nam = getEle("idNam").value;
   //tinh ngay tiep theo
   if (ngay >= 1 && ngay <= 31 && thang >= 1 && thang <= 12) {
-    if (ngay == 29 || ngay == 28) {
-      if (thang == 2) {
+    if (thang == 2 && ((nam % 4 == 0 && nam % 100 != 0) || nam % 400 == 0)) {
+      if (ngay == 29) {
         ngay = 1;
         Number(thang++);
-      } else {
+      } else if (ngay < 29) {
         Number(ngay++);
+      } else {
+        alert(
+          "Bạn đã nhập sai định dạng có thể dẫn tới sai kết quả, mời nhập lại        "
+        );
+        ngayTiepTheo.style.display = "none";
+        ngayTruocDo.style.display = "none";
       }
+    } else if (ngay >= 29 && thang == 2) {
+      alert(
+        "Bạn đã nhập sai định dạng có thể dẫn tới sai kết quả, mời nhập lại"
+      );
+      ngayTiepTheo.style.display = "none";
+      ngayTruocDo.style.display = " none";
     } else if (
       (ngay == 31 &&
         ((thang <= 7 && thang % 2 != 0) ||
@@ -85,14 +101,22 @@ document.getElementById("btnKqTiepTheo").onclick = function () {
     } else {
       Number(ngay++);
     }
-    ngayTiepTheo.style.display = "block";
   } else {
-    alert("Bạn đã nhập sai định dạng, mời nhập lại...");
+    alert("Bạn đã nhập sai định dạng có thể dẫn tới sai kết quả, mời nhập lại");
     ngayTiepTheo.style.display = "none";
   }
+  // ngayTiepTheo.style.display = "block";
+
   ngayTiepTheo.innerHTML = "ngày " + ngay + " tháng " + thang + " năm " + nam;
 };
 
+getEle("btnKq1").onclick = function () {
+  ngayTruoc();
+  ngayTiep();
+};
+// getEle('btnKqTiepTheo').onclick = function(){
+//   ngayTiep();
+//  }
 /**BÀI 2
  * Bước 1: khai báo input: nhập vào nhapThang và nhapNam
  * Bước 2: _xét trường hợp tháng 2: xét xem nhapNam có phải là năm nhuận hay không bằng cách (nhapNam % 4 == 0 && nhapNam % 100 != 0) || nhapNam % 400 == 0) => nếu chia hết thì đó là năm nhuận và khi đó nếu nhapThang=2 thì tháng đó sẽ có 29 ngày và ngược lại nếu không phải năm nhuận thì tháng 2 sẽ là 28 ngày
@@ -100,11 +124,11 @@ document.getElementById("btnKqTiepTheo").onclick = function () {
  * Bước 3:_ xuất output: sau khi nhập tháng năm sẽ xuất ra Tháng này có ... ngày.
  * _Nếu nhập sai định dạng tháng>12 và tháng<1 sẽ bị báo lỗi cho người dùng nhập lại.
  */
-var xuatNgay = document.getElementById("idXuatNgay");
-var loiNhap = document.getElementById("idLoiNhap");
-document.getElementById("btnKq2").onclick = function () {
-  var nhapThang = document.getElementById("idNhapThang").value;
-  var nhapNam = document.getElementById("idNhapNam").value;
+var xuatNgay = getEle("idXuatNgay");
+var loiNhap = getEle("idLoiNhap");
+getEle("btnKq2").onclick = function () {
+  var nhapThang = getEle("idNhapThang").value;
+  var nhapNam = getEle("idNhapNam").value;
 
   if (nhapThang > 12 || nhapThang < 1) {
     loiNhap.innerHTML = "Nhập sai, mời nhập lại !";
@@ -139,9 +163,9 @@ document.getElementById("btnKq2").onclick = function () {
    Bước 3: xuất output cachDoc
    Cách đọc của số nguyên này là:
 */
-var cachDoc = document.getElementById("idCachDoc");
-document.getElementById("btnKq3").onclick = function () {
-  var docSoNguyen = document.getElementById("idDocSoNguyen").value;
+var cachDoc = getEle("idCachDoc");
+getEle("btnKq3").onclick = function () {
+  var docSoNguyen = getEle("idDocSoNguyen").value;
 
   var soHangTram = Math.floor((docSoNguyen % 1000) / 100);
   var soHangChuc = Math.floor((docSoNguyen % 100) / 10);
@@ -168,16 +192,16 @@ document.getElementById("btnKq3").onclick = function () {
 
 /**BÀI 4 */
 
-var xuatOzA = document.getElementById("xuatOzA");
-var xuatOzB = document.getElementById("xuatOzB");
-var xuatOzC = document.getElementById("xuatOzC");
-document.getElementById("btnKq4").onclick = function () {
-  var oxA = document.getElementById("idOxA").value;
-  var oyA = document.getElementById("idOyA").value;
-  var oxB = document.getElementById("idOxB").value;
-  var oyB = document.getElementById("idOyB").value;
-  var oxC = document.getElementById("idOxC").value;
-  var oyC = document.getElementById("idOyC").value;
+var xuatOzA = getEle("xuatOzA");
+var xuatOzB = getEle("xuatOzB");
+var xuatOzC = getEle("xuatOzC");
+getEle("btnKq4").onclick = function () {
+  var oxA = getEle("idOxA").value;
+  var oyA = getEle("idOyA").value;
+  var oxB = getEle("idOxB").value;
+  var oyB = getEle("idOyB").value;
+  var oxC = getEle("idOxC").value;
+  var oyC = getEle("idOyC").value;
   var ozA = Math.round(Math.sqrt(oxA * oxA + oyA * oyA) * 100) / 100;
   var ozB = Math.round(Math.sqrt(oxB * oxB + oyB * oyB) * 100) / 100;
   var ozC = Math.round(Math.sqrt(oxC * oxC + oyC * oyC) * 100) / 100;
